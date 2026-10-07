@@ -4,7 +4,7 @@
  */
 export const NYAN_LINKS = {
   /** 公开源码仓库，如 https://github.com/你的用户名/nyan-clash */
-  repo: '',
+  repo: 'https://github.com/aden-maker/nyan-clash',
   /** B 站个人空间，如 https://space.bilibili.com/你的UID */
   bilibili: '',
   /** 打赏页面，如爱发电 https://afdian.com/a/你的ID */
