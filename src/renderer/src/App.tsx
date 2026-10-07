@@ -3,7 +3,7 @@ import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
 import { NavigateFunction, useLocation, useNavigate, useRoutes } from 'react-router-dom'
 import OutboundModeSwitcher from '@renderer/components/sider/outbound-mode-switcher'
 import { Button, Divider, Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/react'
-import { IoArrowForward, IoSettings } from 'react-icons/io5'
+import { IoArrowForward, IoHome, IoSettings } from 'react-icons/io5'
 import { toast } from '@renderer/components/base/toast'
 import routes, { useDeferredRoutePreload } from '@renderer/routes'
 import UpdaterButton from '@renderer/components/updater/updater-button'
@@ -23,7 +23,11 @@ import { hasPendingPluginFile, subscribePluginFile } from '@renderer/utils/plugi
 import 'driver.js/dist/driver.css'
 import { useTranslation } from 'react-i18next'
 import { DEFAULT_ENABLE_TRAFFIC_LOGGER } from '../../shared/appConfig'
-import MihomoIcon from './components/base/mihomo-icon'
+import DesktopPet from './components/nyan/desktop-pet'
+import AppBackground from './components/nyan/app-background'
+import ClipboardSubscription from './components/nyan/clipboard-subscription'
+import { useNyanSettings } from './nyan/store'
+import logoImg from './assets/logo.png'
 import { getSiderCardByPath } from './utils/sider'
 import { markInitialContentPartReady } from './utils/startup'
 
@@ -63,7 +67,7 @@ const ModeSelection: React.FC<{ onSelect: (mode: 'standard' | 'simple') => Promi
                   <Button
                     key={mode}
                     variant="flat"
-                    color={mode === 'simple' ? 'primary' : 'default'}
+                    color={mode === 'standard' ? 'primary' : 'default'}
                     className="h-auto min-h-24 w-full min-w-0 shrink-0 justify-start gap-4 border border-default-200 px-4 py-4 whitespace-normal"
                     aria-labelledby={`operation-mode-${mode}-label`}
                     aria-describedby={`operation-mode-${mode}-description`}
@@ -87,6 +91,11 @@ const ModeSelection: React.FC<{ onSelect: (mode: 'standard' | 'simple') => Promi
                     <span className="flex min-w-0 flex-1 flex-col gap-1.5 text-start wrap-break-word">
                       <span id={`operation-mode-${mode}-label`} className="text-base font-semibold">
                         {t(`settings.operationMode.${mode}.label`)}
+                        {mode === 'standard' && (
+                          <span className="ms-2 rounded-full bg-primary px-2 py-0.5 align-middle text-tiny text-primary-foreground">
+                            {t('settings.operationMode.recommended')}
+                          </span>
+                        )}
                       </span>
                       <span
                         id={`operation-mode-${mode}-description`}
@@ -141,6 +150,7 @@ const App: React.FC = () => {
     lastSelectedSiderCard = 'proxy',
     rememberSelectedSiderCard = false
   } = appConfig || {}
+  const [nyanSettings] = useNyanSettings()
   useTrafficLogger(enableTrafficLogger)
   useDnsOverrideAutoDisabledNotice()
   const narrowWidth = platform === 'darwin' ? 70 : 60
@@ -153,6 +163,7 @@ const App: React.FC = () => {
   const navigate: NavigateFunction = useNavigate()
   const location = useLocation()
   const page = useRoutes(routes)
+  const isHome = location.pathname === '/home'
 
   useEffect(() => {
     const openPluginImport = (): void => {
@@ -258,7 +269,22 @@ const App: React.FC = () => {
       {siderWidthValue === narrowWidth ? (
         <div style={{ width: `${narrowWidth}px` }} className="side h-full flex flex-col">
           <div className="app-drag flex shrink-0 justify-center items-center z-40 bg-transparent h-11.25">
-            {platform !== 'darwin' && <MihomoIcon className="h-8 leading-8 text-lg mx-px" />}
+            {platform !== 'darwin' && (
+              <img src={logoImg} alt="" draggable={false} className="h-8 w-8 rounded-medium" />
+            )}
+          </div>
+          <div className="flex shrink-0 justify-center pb-2">
+            <Button
+              size="sm"
+              isIconOnly
+              title={t('home.title')}
+              className="app-nodrag"
+              color={isHome ? 'primary' : 'default'}
+              variant={isHome ? 'solid' : 'light'}
+              onPress={() => navigate('/home')}
+            >
+              <IoHome className="text-[20px]" />
+            </Button>
           </div>
           <Suspense fallback={<div className="min-h-0 flex-1" />}>
             <SiderCards iconOnly />
@@ -290,8 +316,15 @@ const App: React.FC = () => {
               className={`flex justify-between p-2 ${!useWindowFrame && platform === 'darwin' ? 'ml-15' : ''}`}
             >
               <div className="flex ml-1">
-                <MihomoIcon className="h-8 leading-8 text-lg mx-px" />
-                <h3 className="text-lg font-bold leading-8">Clash Party</h3>
+                <img
+                  src={logoImg}
+                  alt=""
+                  draggable={false}
+                  className="h-8 w-8 mr-1.5 rounded-medium"
+                />
+                <h3 className="text-lg font-bold leading-8 bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  Nyan Clash
+                </h3>
               </div>
               <UpdaterButton />
               <Button
@@ -308,7 +341,16 @@ const App: React.FC = () => {
               </Button>
             </div>
           </div>
-          <div className="mt-2 mx-2">
+          <div className="mt-2 mx-2 flex flex-col gap-2">
+            <Button
+              fullWidth
+              className={`app-nodrag justify-start font-bold ${isHome ? '' : 'bg-content1 shadow-medium'}`}
+              color={isHome ? 'primary' : 'default'}
+              startContent={<IoHome className="text-lg" />}
+              onPress={() => navigate('/home')}
+            >
+              {t('home.title')}
+            </Button>
             <OutboundModeSwitcher />
           </div>
           <Suspense fallback={null}>
@@ -341,6 +383,9 @@ const App: React.FC = () => {
           <FirstContentReady />
         </Suspense>
       </div>
+      <AppBackground />
+      {nyanSettings.petEnabled && <DesktopPet />}
+      <ClipboardSubscription />
     </div>
   )
 }

@@ -96,12 +96,17 @@ async function getGitHubAssetSha256(
   return match[1].toLowerCase()
 }
 
+/**
+ * Nyan Clash 自己的 latest.yml 地址。留空表示没有发布渠道、不检查更新——
+ * 绝不能指回上游 mihomo-party，否则会把用户"更新"成原版。
+ */
+const NYAN_UPDATE_URL = ''
+
 export async function checkUpdate(): Promise<IAppVersion | undefined> {
+  if (!NYAN_UPDATE_URL) return undefined
   const [{ 'mixed-port': mixedPort = DEFAULT_MIHOMO_PORTS.mixed }, { githubProxy = '' }] =
     await Promise.all([getControledMihomoConfig(), getAppConfig()])
-  const githubUrl =
-    'https://github.com/mihomo-party-org/mihomo-party/releases/latest/download/latest.yml'
-  const res = await tryDownload(buildDownloadUrls(githubUrl, githubProxy), {
+  const res = await tryDownload(buildDownloadUrls(NYAN_UPDATE_URL, githubProxy), {
     headers: { 'Content-Type': 'application/octet-stream' },
     proxy: updaterProxy(mixedPort),
     responseType: 'text'

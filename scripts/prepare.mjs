@@ -5,6 +5,15 @@ import zlib from 'zlib'
 import { extract } from 'tar'
 import { execSync } from 'child_process'
 
+// 设置 GITHUB_MIRROR（如 https://gh-proxy.com/）后，所有 github.com 请求都走该加速前缀
+const GITHUB_MIRROR = process.env.GITHUB_MIRROR?.replace(/\/?$/, '/')
+if (GITHUB_MIRROR) {
+  const rawFetch = globalThis.fetch
+  globalThis.fetch = (url, init) =>
+    rawFetch(String(url).startsWith('https://github.com/') ? GITHUB_MIRROR + url : url, init)
+  console.log(`[INFO]: using GitHub mirror ${GITHUB_MIRROR}`)
+}
+
 const cwd = process.cwd()
 const TEMP_DIR = path.join(cwd, 'node_modules/.temp')
 const platform = process.platform
@@ -296,8 +305,20 @@ async function downloadFile(url, path) {
   if (!response.ok) {
     throw new Error(`download failed: ${response.status} ${response.statusText} for "${url}"`)
   }
-  const buffer = await response.arrayBuffer()
-  fs.writeFileSync(path, new Uint8Array(buffer))
+  const total = Number(response.headers.get('content-length')) || 0
+  const fileName = url.split('/').pop()
+  const chunks = []
+  let received = 0
+  let nextReport = 0.25
+  for await (const chunk of response.body) {
+    chunks.push(chunk)
+    received += chunk.length
+    if (total && received / total >= nextReport && received < total) {
+      console.log(`[下载中] ${fileName} ${Math.floor((received / total) * 100)}%`)
+      nextReport += 0.25
+    }
+  }
+  fs.writeFileSync(path, Buffer.concat(chunks))
 
   console.log(`[INFO]: download finished "${url}"`)
 }
@@ -575,17 +596,33 @@ const tasks = [
   }
 ]
 
+const isSkipped = (task) =>
+  (task.winOnly && platform !== 'win32') ||
+  (task.linuxOnly && platform !== 'linux') ||
+  (task.unixOnly && platform === 'win32') ||
+  (task.darwinOnly && platform !== 'darwin')
+
+const totalTasks = tasks.filter((task) => !isSkipped(task)).length
+let doneTasks = 0
+
+function reportProgress(name) {
+  doneTasks++
+  const width = 20
+  const filled = Math.round((doneTasks / totalTasks) * width)
+  console.log(
+    `[进度] ${'█'.repeat(filled)}${'░'.repeat(width - filled)} ${doneTasks}/${totalTasks}  ${name} 完成`
+  )
+}
+
 async function runTask() {
   const task = tasks.shift()
   if (!task) return
-  if (task.winOnly && platform !== 'win32') return runTask()
-  if (task.linuxOnly && platform !== 'linux') return runTask()
-  if (task.unixOnly && platform === 'win32') return runTask()
-  if (task.darwinOnly && platform !== 'darwin') return runTask()
+  if (isSkipped(task)) return runTask()
 
   for (let i = 0; i < task.retry; i++) {
     try {
       await task.func()
+      reportProgress(task.name)
       break
     } catch (err) {
       console.error(`[ERROR]: task::${task.name} try ${i} ==`, err.message)
@@ -602,5 +639,5 @@ async function runTask() {
   return runTask()
 }
 
-runTask()
-runTask()
+const concurrency = Number(process.env.PREPARE_CONCURRENCY) || 4
+for (let i = 0; i < concurrency; i++) runTask()

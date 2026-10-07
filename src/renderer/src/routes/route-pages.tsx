@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { onInitialContentReady } from '@renderer/utils/startup'
 import { createPreloadablePage } from './preloadable-page'
 
+const HomePage = createPreloadablePage(() => import('@renderer/pages/home'))
 const NetworkPage = createPreloadablePage(() => import('@renderer/pages/network'))
 const OverridePage = createPreloadablePage(() => import('@renderer/pages/override'))
 const ProxiesPage = createPreloadablePage(() => import('@renderer/pages/proxies'))
@@ -22,6 +23,7 @@ const TrafficPage = createPreloadablePage(() => import('@renderer/pages/traffic'
 const SimplePage = ProfilesPage
 const SimpleModulePage = createPreloadablePage(() => import('@renderer/pages/simple-module'))
 
+export const Home = HomePage.Page
 export const NetworkPageComponent = NetworkPage.Page
 export const Override = OverridePage.Page
 export const Proxies = ProxiesPage.Page
@@ -42,9 +44,10 @@ export const Simple = SimplePage.Page
 export const SimpleModule = SimpleModulePage.Page
 
 // 默认落地页立即预加载，避免首屏等待 chunk 下载。
-void ProxiesPage.preload().catch(() => {})
+void HomePage.preload().catch(() => {})
 
 const remainingPageLoaders: Array<() => Promise<unknown>> = [
+  ProxiesPage.preload,
   SettingsPage.preload,
   ProfilesPage.preload,
   ConnectionsPage.preload,

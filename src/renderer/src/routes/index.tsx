@@ -4,6 +4,7 @@ import { getSiderCardRoute } from '@renderer/utils/sider'
 import {
   Connections,
   DNS,
+  Home,
   Logs,
   Mihomo,
   NetworkPageComponent,
@@ -33,8 +34,9 @@ const HomeRedirect: React.FC = () => {
       ? 'simple'
       : appConfig.rememberSelectedSiderCard
         ? appConfig.lastSelectedSiderCard
-        : 'proxy'
+        : 'home'
   if (dest === 'simple') return <Navigate to="/simple" replace />
+  if (dest === 'home') return <Navigate to="/home" replace />
   return <Navigate to={getSiderCardRoute(dest)} replace />
 }
 
@@ -45,6 +47,10 @@ const ProfilesRoute: React.FC = () => {
 }
 
 const routes = [
+  {
+    path: '/home',
+    element: <Home />
+  },
   {
     path: '/network',
     element: <NetworkPageComponent />

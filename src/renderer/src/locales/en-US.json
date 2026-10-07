@@ -76,6 +76,7 @@
   "settings.language": "Language",
   "settings.operationMode.title": "Configuration mode",
   "settings.operationMode.standard.label": "Standard mode",
+  "settings.operationMode.recommended": "Recommended",
   "settings.operationMode.simple.label": "Simple mode",
   "settings.operationMode.error": "Failed to switch configuration mode",
   "settings.operationMode.select.title": "Choose a configuration mode",
@@ -179,7 +180,7 @@
   "mihomo.gist.copyUrl": "Copy Gist URL",
   "mihomo.gist.token": "GitHub Token",
   "mihomo.gist.ageEncrypt": "Gist Runtime Config Age Encryption",
-  "mihomo.gist.ageEncryptTooltip": "When enabled, Clash Party uploads the runtime config to Gist as an age armored file. Use the Gist raw URL with a client that has the exported private key.",
+  "mihomo.gist.ageEncryptTooltip": "When enabled, Nyan Clash uploads the runtime config to Gist as an age armored file. Use the Gist raw URL with a client that has the exported private key.",
   "mihomo.gist.ageRecipient": "Gist Age Recipient (Public Key)",
   "mihomo.gist.ageRecipientPlaceholder": "age1...",
   "mihomo.gist.ageKeys": "Gist Age Keys",
@@ -821,7 +822,7 @@
   "tray.tooltip.enabled": "On",
   "tray.tooltip.disabled": "Off",
   "tray.tooltip.customIcon": "Custom icon",
-  "guide.welcome.title": "Welcome to Clash Party",
+  "guide.welcome.title": "Welcome to Nyan Clash",
   "guide.welcome.description": "This is an interactive tutorial. If you are already familiar with the software, you can click the close button in the top right corner. You can always open this tutorial again from the settings.",
   "guide.sider.title": "Navigation Bar",
   "guide.sider.description": "The left side is the application's navigation bar, which also serves as a dashboard. Here you can switch between different pages and get an overview of commonly used status information.",
@@ -832,9 +833,9 @@
   "guide.profile.title": "Profile Management",
   "guide.profile.description": "The profile management card shows information about the currently running subscription configuration. Click to enter the profile management page where you can manage your subscription configurations.",
   "guide.import.title": "Import Subscription",
-  "guide.import.description": "Clash Party supports various subscription import methods. Enter your subscription link here and click import to import your subscription configuration. If your subscription requires a proxy to update, check the 'Proxy' option before importing (this requires having a working subscription first).",
+  "guide.import.description": "Nyan Clash supports various subscription import methods. Enter your subscription link here and click import to import your subscription configuration. If your subscription requires a proxy to update, check the 'Proxy' option before importing (this requires having a working subscription first).",
   "guide.substore.title": "Sub-Store",
-  "guide.substore.description": "Clash Party has deep integration with Sub-Store. You can click this button to enter Sub-Store or directly import your subscriptions managed through Sub-Store. Clash Party uses its built-in Sub-Store backend by default. If you have your own Sub-Store backend, you can configure it in the settings page. If you don't use Sub-Store, you can also disable it in the settings.",
+  "guide.substore.description": "Nyan Clash has deep integration with Sub-Store. You can click this button to enter Sub-Store or directly import your subscriptions managed through Sub-Store. Nyan Clash uses its built-in Sub-Store backend by default. If you have your own Sub-Store backend, you can configure it in the settings page. If you don't use Sub-Store, you can also disable it in the settings.",
   "guide.localProfile.title": "Local Profile",
   "guide.localProfile.description": "Click '+' to import a local file or create a new empty configuration for editing.",
   "guide.sysproxy.title": "System Proxy",
@@ -844,13 +845,13 @@
   "guide.tun.title": "Virtual Network Card",
   "guide.tun.description": "Virtual network card, commonly known as 'Tun Mode' in similar software, allows you to let the core take control of all traffic for applications that don't follow system proxy settings.",
   "guide.tunSetting.title": "Virtual Network Card Settings",
-  "guide.tunSetting.description": "Here you can modify virtual network card settings. Clash Party has theoretically solved all permission issues. If your virtual network card is still not working, try resetting the firewall (Windows) or manually authorizing the core (MacOS/Linux) and then restart the core.",
+  "guide.tunSetting.description": "Here you can modify virtual network card settings. Nyan Clash has theoretically solved all permission issues. If your virtual network card is still not working, try resetting the firewall (Windows) or manually authorizing the core (MacOS/Linux) and then restart the core.",
   "guide.override.title": "Override",
-  "guide.override.description": "Clash Party provides powerful override functionality to customize your imported subscription configurations, such as adding rules and customizing proxy groups. You can directly import override files written by others or write your own. <b>Remember to enable the override file on the subscription you want to override</b>. For override file syntax, please refer to the <a href=\"https://clashparty.org/docs/guide/override\" target=\"_blank\">official documentation</a>.",
+  "guide.override.description": "Nyan Clash provides powerful override functionality to customize your imported subscription configurations, such as adding rules and customizing proxy groups. You can directly import override files written by others or write your own. <b>Remember to enable the override file on the subscription you want to override</b>. For override file syntax, please refer to the <a href=\"https://clashparty.org/docs/guide/override\" target=\"_blank\">official documentation</a>.",
   "guide.dns.title": "DNS OVRD",
   "guide.dns.description": "The software defaults to using the application's DNS settings to override the subscription configuration. If you need to use the DNS settings from the subscription configuration, please disable this feature. The same applies to domain sniffing.",
   "guide.end.title": "Tutorial Complete",
-  "guide.end.description": "Now that you understand the basic usage of the software, import your subscription and start using it. Enjoy!\nYou can also join our official <a href=\"https://t.me/mihomo_party_group\" target=\"_blank\">Telegram group</a> for the latest news.",
+  "guide.end.description": "Now that you understand the basic usage of the software, import your subscription and start using it. Enjoy!",
   "network.topology.title": "Network Topology",
   "network.topology.clients": "clients",
   "network.topology.rules": "Rules",
@@ -870,7 +871,7 @@
   "settings.githubProxy.customAddress": "Custom Proxy Address",
   "settings.githubProxy.customPlaceholder": "https://gh-proxy.example.com",
   "plugins": {
-    "title": "Airport Plugins",
+    "title": "Provider Plugins",
     "import": "Import Plugin",
     "chooseFile": "Choose File (.cpx)",
     "next": "Next",
@@ -916,5 +917,144 @@
     "previewFailed": "Invalid plugin file",
     "outdatedFile": "This plugin file format is outdated; please obtain the new one from your provider",
     "fileTooLarge": "Plugin file is too large"
+  },
+  "mascot": {
+    "picked": "Eek! Put me down, nya!",
+    "thrown": "Waaah — be gentle!",
+    "wake": "Mmm… I was dreaming…",
+    "proxyOn": "Proxy is on — go surf the web, nya~",
+    "proxyOff": "System proxy is off. Want to turn it on, nya?",
+    "lines": [
+      "Nya~ Have a happy browsing day!",
+      "High latency? Try a speed test in the proxy groups~",
+      "Head pats are fine, but stop poking me!",
+      "Remember to update your subscriptions~",
+      "Take a break, I'll keep an eye on the network, nya",
+      "I've got the globe — ready when you are!"
+    ]
+  },
+  "nyan": {
+    "title": "Desktop Pet & Background",
+    "reset": "Reset size, speed and background effects",
+    "pose": {
+      "stand": "Stand",
+      "walk": "Walk",
+      "climb": "Climb",
+      "drag": "Picked up",
+      "sleep": "Sleep"
+    },
+    "pet": {
+      "enable": "Show desktop pet",
+      "choose": "Choose a pet",
+      "add": "Add",
+      "fromImages": "Create from images",
+      "fromImagesDesc": "Pick a transparent image for each pose",
+      "fromPack": "Import pet pack",
+      "fromPackDesc": "Import a shared .json pet pack",
+      "export": "Export as pet pack",
+      "behavior": "Behavior",
+      "roam": "Wander around",
+      "static": "Stay put",
+      "climb": "Allow wall climbing",
+      "size": "Size",
+      "speed": "Speed",
+      "createTitle": "Create a pet from images",
+      "name": "Name",
+      "namePlaceholder": "Give it a name",
+      "createHint": "Transparent PNGs work best. Only \"Stand\" is required; missing poses fall back to it. Use the button under each image to set which way the character faces (for Climb: which side the wall is on).",
+      "facingLeft": "Faces left",
+      "facingRight": "Faces right",
+      "imported": "Added pet \"{{name}}\"",
+      "importedPack": "Pet pack imported",
+      "hiddenHint": "The pet is taking a break. Turn it back on in Settings → Desktop Pet & Background"
+    },
+    "background": {
+      "choose": "Choose a background",
+      "auto": "Auto (follow light/dark)",
+      "none": "No background",
+      "add": "Import image / video",
+      "imported": "Background imported",
+      "dim": "Overlay strength",
+      "blur": "Background blur",
+      "sky": "Clear Sky",
+      "seaside": "Summer Seaside",
+      "night": "Starry Night",
+      "nightLive": "Meteor Night",
+      "live": "Live"
+    },
+    "about": {
+      "title": "About Nyan Clash",
+      "license": "Open-source software modified from Mihomo Party, licensed under GPL-3.0",
+      "source": "Source code",
+      "donate": "Support the author",
+      "bilibili": "Author's Bilibili page",
+      "feedback": "Report a problem",
+      "credits": "Credits",
+      "credit": {
+        "base": "Nyan Clash is modified from it",
+        "core": "Proxy core",
+        "substore": "Subscription management",
+        "framework": "UI framework"
+      },
+      "note": "Nyan Clash is not affiliated with the authors of the projects above. Please report issues to Nyan Clash instead of the upstream authors. The desktop pet, icon and built-in backgrounds are original AI-generated assets."
+    }
+  },
+  "settings.advanced.show": "Show advanced settings",
+  "settings.advanced.hide": "Hide advanced settings",
+  "settings.advanced.hint": "Sub-Store, core, WebDAV backup, shortcuts and other less common settings",
+  "home": {
+    "title": "Home",
+    "connect": {
+      "on": "Connected",
+      "off": "Connect",
+      "busy": "Please wait…",
+      "needProfile": "Import a subscription below before connecting",
+      "tunOn": "Connected through TUN. Turn it off from the \"TUN\" card in the sidebar."
+    },
+    "status": {
+      "on": "Connected and protecting your network",
+      "off": "Not connected",
+      "hint": "Press the big button to get online, nya~",
+      "noProfile": "No subscription yet. Import one first.",
+      "viaSysProxy": "Connected through the system proxy. Browsers and most apps use it.",
+      "viaTun": "Connected through TUN. All apps go through the proxy."
+    },
+    "import": {
+      "title": "Step 1: import your subscription",
+      "description": "Paste the subscription link from your provider. It will be enabled automatically.",
+      "placeholder": "https://… or clash://install-config?url=…",
+      "paste": "Paste from clipboard",
+      "button": "Import",
+      "tip1": "Look for \"Copy subscription link\" or \"Import to Clash\" on your provider's website",
+      "tip2": "Copy the link and come back. Nyan Clash will notice it and offer to import.",
+      "invalid": "This does not look like a valid subscription link",
+      "success": "Subscription \"{{name}}\" imported and enabled",
+      "failed": "Failed to import subscription"
+    },
+    "profile": {
+      "title": "Current subscription",
+      "traffic": "Traffic used",
+      "daysLeft": "{{days}} days left",
+      "expired": "Expired",
+      "noInfo": "This subscription does not report traffic usage"
+    },
+    "node": {
+      "title": "Current node · {{group}}",
+      "titleEmpty": "Current node",
+      "more": "All nodes",
+      "direct": "Direct mode: not using a proxy",
+      "fastest": "Test and pick the fastest",
+      "test": "Test speed (this group picks automatically)",
+      "allFailed": "Every node failed the speed test. Check your subscription or network.",
+      "switched": "Switched to \"{{name}}\" ({{delay}} ms)",
+      "tested": "Fastest is \"{{name}}\" ({{delay}} ms)"
+    },
+    "clipboard": {
+      "title": "Subscription link found",
+      "description": "You just copied a subscription link. Import and enable it?",
+      "ignore": "Ignore",
+      "import": "Import and enable",
+      "setting": "Detect subscription links in the clipboard"
+    }
   }
 }

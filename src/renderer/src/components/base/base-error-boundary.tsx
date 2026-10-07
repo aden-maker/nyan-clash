@@ -2,6 +2,7 @@ import { Button } from '@heroui/react'
 import { ReactNode } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { useTranslation } from 'react-i18next'
+import { NYAN_LINKS } from '@renderer/nyan/meta'
 
 const ErrorFallback = ({ error }: FallbackProps): React.ReactElement => {
   const { t } = useTranslation()
@@ -16,24 +17,17 @@ const ErrorFallback = ({ error }: FallbackProps): React.ReactElement => {
       <Button size="sm" color="primary" onPress={() => location.reload()}>
         {t('common.error.reload')}
       </Button>
-      <Button
-        size="sm"
-        color="primary"
-        variant="flat"
-        className="ml-2"
-        onPress={() => open('https://github.com/mihomo-party-org/mihomo-party/issues/new/choose')}
-      >
-        GitHub
-      </Button>
-      <Button
-        size="sm"
-        color="primary"
-        variant="flat"
-        className="ml-2"
-        onPress={() => open('https://t.me/mihomo_party_group')}
-      >
-        Telegram
-      </Button>
+      {NYAN_LINKS.repo && (
+        <Button
+          size="sm"
+          color="primary"
+          variant="flat"
+          className="ml-2"
+          onPress={() => open(`${NYAN_LINKS.repo.replace(/\/$/, '')}/issues`)}
+        >
+          {t('nyan.about.feedback')}
+        </Button>
+      )}
 
       <Button
         size="sm"

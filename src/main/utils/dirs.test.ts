@@ -63,8 +63,8 @@ describe('configureAppPaths', () => {
     const { configureAppPaths } = await import('./dirs')
     configureAppPaths()
 
-    expect(setName).toHaveBeenCalledWith('mihomo-party-dev')
-    expect(paths.userData).toBe(path.join(APP_DATA, 'mihomo-party-dev'))
+    expect(setName).toHaveBeenCalledWith('nyan-clash-dev')
+    expect(paths.userData).toBe(path.join(APP_DATA, 'nyan-clash-dev'))
   })
 
   it('leaves packaged stable and dev-release builds on production paths', async () => {
@@ -82,7 +82,7 @@ describe('configureAppPaths', () => {
     const { configureAppPaths } = await import('./dirs')
     configureAppPaths()
 
-    expect(setName).toHaveBeenCalledWith('mihomo-party-dev')
+    expect(setName).toHaveBeenCalledWith('nyan-clash-dev')
     expect(paths.userData).toBe(path.join(EXE_DIR, 'data'))
     expect(setPath).toHaveBeenLastCalledWith('userData', path.join(EXE_DIR, 'data'))
   })

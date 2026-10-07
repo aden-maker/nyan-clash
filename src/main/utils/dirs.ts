@@ -18,8 +18,8 @@ function portableDataDir(): string {
 // 仍与正式版共享身份和数据，保持原有滚动升级路径。
 export function configureAppPaths(): void {
   if (!app.isPackaged) {
-    app.setName('mihomo-party-dev')
-    app.setPath('userData', path.join(app.getPath('appData'), 'mihomo-party-dev'))
+    app.setName('nyan-clash-dev')
+    app.setPath('userData', path.join(app.getPath('appData'), 'nyan-clash-dev'))
   }
 
   // portable 模式始终拥有最高优先级。

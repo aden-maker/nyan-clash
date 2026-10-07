@@ -1,5 +1,5 @@
-appId: party.mihomo.app
-productName: Clash Party
+appId: app.nyanclash.desktop
+productName: Nyan Clash
 directories:
   buildResources: build
 files:
@@ -21,23 +21,23 @@ extraResources:
   - from: './extra/'
     to: ''
 protocols:
-  name: 'Clash Party URI Scheme'
+  name: 'Nyan Clash URI Scheme'
   schemes:
     - 'clash'
     - 'mihomo'
 fileAssociations:
   - ext: 'cpx'
-    name: 'Clash Party Plugin'
-    description: 'Clash Party airport plugin descriptor'
-    mimeType: 'application/x-clash-party-plugin'
+    name: 'Nyan Clash Plugin'
+    description: 'Nyan Clash airport plugin descriptor'
+    mimeType: 'application/x-nyan-clash-plugin'
     role: 'Viewer'
 win:
   target:
     - nsis
     - 7z
-  artifactName: clash-party-windows-${version}-${arch}-portable.${ext}
+  artifactName: nyan-clash-windows-${version}-${arch}-portable.${ext}
 nsis:
-  artifactName: clash-party-windows-${version}-${arch}-setup.${ext}
+  artifactName: nyan-clash-windows-${version}-${arch}-setup.${ext}
   uninstallDisplayName: ${productName}
   allowToChangeInstallationDirectory: true
   oneClick: false
@@ -58,7 +58,7 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
-  artifactName: clash-party-macos-${version}-${arch}.${ext}
+  artifactName: nyan-clash-macos-${version}-${arch}.${ext}
 pkg:
   allowAnywhere: false
   allowCurrentUserHome: false
@@ -67,24 +67,24 @@ pkg:
     alignment: bottomleft
     file: build/background.png
 linux:
-  executableName: mihomo-party
+  executableName: nyan-clash
   icon: build/icon.png
   desktop:
     entry:
-      Name: Clash Party
+      Name: Nyan Clash
       GenericName: Proxy Client
       Comment: A GUI client based on Mihomo
       MimeType: 'x-scheme-handler/clash;x-scheme-handler/mihomo'
       Keywords: proxy;clash;mihomo;vpn;
-      StartupWMClass: mihomo-party
-      Icon: mihomo-party
+      StartupWMClass: nyan-clash
+      Icon: nyan-clash
   target:
     - deb
     - rpm
     - pacman
   maintainer: mihomo-party-org
   category: Utility
-  artifactName: clash-party-linux-${version}-${arch}.${ext}
+  artifactName: nyan-clash-linux-${version}-${arch}.${ext}
 deb:
   afterInstall: 'build/linux/postinst'
   afterRemove: 'build/linux/postuninst'
@@ -117,6 +117,6 @@ pacman:
     - util-linux-libs
     - libsecret
     - wl-clipboard
-  artifactName: clash-party-linux-${version}-${arch}.pkg.tar.zst
+  artifactName: nyan-clash-linux-${version}-${arch}.pkg.tar.zst
 npmRebuild: true
 publish: []
